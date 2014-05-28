@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.metamx</groupId>
+    <groupId>com.n3twork.druid</groupId>
     <artifactId>http-client</artifactId>
     <version>0.9.4</version>
     <name>http-client</name>
     <description>An HTTP client using Netty</description>
     <scm>
-        <connection>scm:git:ssh://git@github.com/metamx/http-client.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/metamx/http-client.git</developerConnection>
-        <url>http://www.github.com/metamx/http-client</url>
+        <connection>scm:git:ssh://git@github.com/N3TWORK/http-client.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/N3TWORK/http-client.git</developerConnection>
+        <url>http://www.github.com/N3TWORK/http-client</url>
       <tag>http-client-0.9.4</tag>
   </scm>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+
     <dependencies>
         <dependency>
-            <groupId>com.metamx</groupId>
+            <groupId>com.n3twork.druid</groupId>
             <artifactId>java-util</artifactId>
-            <version>0.25.0</version>
+            <version>0.25.1</version>
         </dependency>
 
         <dependency>
@@ -53,6 +60,47 @@
 
     <build>
         <plugins>
+            <!-- Sonatype plugins -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -90,12 +138,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>central-local</id>
-            <name>Central</name>
-            <url>https://metamx.artifactoryonline.com/metamx/pub-libs-releases-local</url>
-        </repository>
-    </distributionManagement>
 </project>
